@@ -1,0 +1,21 @@
+description: >
+  Locate, parse, and re-format supported coverage sources.
+parameters:
+  coverage-file:
+    type: string
+    description: >
+      The coverage file to format.
+  input-type:
+    type: enum
+    enum: [clover, cobertura, coverage.py, excoveralls, gcov, gocov, jacoco, lcov, simplecov]
+    description: >
+      The type of input source to use.
+  output:
+    type: string
+    default: coverage/codeclimate.json
+    description: >
+      The output path. (default "coverage/codeclimate.json")
+steps:
+  - run:
+      name: Formatting coverage report
+      command: cc-test-reporter format-coverage "<< parameters.coverage-file >>" --input-type << parameters.input-type >> --output "<< parameters.output >>"
